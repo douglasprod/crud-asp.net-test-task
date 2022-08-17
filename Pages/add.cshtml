@@ -1,0 +1,78 @@
+﻿@page
+@model artsofte.Pages.AddEmployeeModel
+@{
+
+}
+
+<br/>
+<h2>Add Empoloyee</h2>
+
+<form method="POST">
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Name</label>
+        <div>
+            <input type="text" class="form-control" name="name" value="@Model.employee.Name">
+        </div>
+        <label class="col-sm-3 col-form-label">Surname</label>
+        <div>
+            <input type="text" class="form-control" name="surname" value="@Model.employee.Name">
+        </div>
+        <label class="col-sm-3 col-form-label">Age</label>
+        <div>
+            <input type="number" class="form-control" name="age" value="@Model.employee.Name">
+        </div>
+        <label class="col-sm-3 col-form-label">Department</label>
+        <div class="input-group mb-3">
+            <select class="custom-select" name="department" value="departmentId" id="inputGroupSelect02">
+                @foreach (var department in Model._departments)
+                {
+                    <option value="@department.Id">@department.Name</option>
+                }
+            </select>
+        </div>
+        <label class="col-sm-3 col-form-label">Programming Language</label>
+        <div class="input-group mb-3">
+            <select class="custom-select" value="languageId" name="language" id="inputGroupSelect02">
+                @foreach (var language in Model._languages)
+                {
+                    <option name="language" value="@language.Id">@language.Language</option>
+                }
+            </select>
+        </div>
+        
+        
+        @if (@Model.errorMessage.Length >= 1)
+        {
+            <div class="row mb-3">
+                <div class="col-sm-9">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>@Model.errorMessage</strong>
+                        <button type='button' class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (@Model.isShowSuccessMessage)
+        {
+            <div class="row mb-3">
+            <div class="col-sm-9">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>@Model.successMessage</strong>
+                    <button type='button' class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            </div>
+        }
+        
+        <div class="row mb-3">
+            <div class="offset-sm-3 col-sm-3 d-grid">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col-sm-3 d-grid">
+                <a class="btn btn-outline-primary" href="/" role="button">Cancel</a>
+            </div>
+        </div>
+
+    </div>
+</form>

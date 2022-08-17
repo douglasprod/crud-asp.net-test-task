@@ -1,0 +1,46 @@
+﻿@page
+@using artsofte.Models
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Age</th>
+        <th scope="col">Department</th>
+        <th scope="col">Programming Language</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model._employees)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Name</td>
+                <td>@user.Surname</td>
+                <td>@user.Age</td>
+                <td>
+                    @if (user.DepartmentId != 0)
+                    {
+                        @Model._departments.FirstOrDefault(x => x.Id == user.DepartmentId).Name
+                    }
+                </td>
+                <td>
+                    @if (user.LanguageId != 0)
+                    {
+                        @Model._languages.FirstOrDefault(x => x.Id == user.LanguageId).Language
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Edit?id=@user.Id">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Delete?id=@user.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
